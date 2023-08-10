@@ -1,7 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 const { Listener } = require('gcommands');
 const { AutoPoster } = require('topgg-autoposter');
-// const { RainbowRole } = require("djs-rainbow");
 const { ActivityType } = require('discord.js');
 const fetch = require('node-fetch');
 const play = require('play-dl');
@@ -31,11 +30,19 @@ new Listener({
 				`in ${client.guilds.cache.size} servers`,
 				'ready for all commands',
 				'/help',
-				'Searching for a new Name',
 				'Hi! I need ur support on Top.gg',
+				'with other bots if u say they better than me',
 			];
 			const statuss = statuses[Math.floor(Math.random() * statuses.length)];
-			client.user.setActivity(statuss, { type: ActivityType.Playing });
+			let type;
+			if (statuss == 'have a lovely day') type = ActivityType.Playing;
+			if (statuss == `with ${users} users`) type = ActivityType.Playing;
+			if (statuss == `in ${client.guilds.cache.size} servers`) type = ActivityType.Playing;
+			if (statuss == 'Ready for all commands') type = ActivityType.Playing;
+			if (statuss == '/help') type = ActivityType.Playing;
+			if (statuss == 'Hi! I need ur support on Top.gg') type = ActivityType.Playing;
+			if (statuss == 'in with other bots if u say they better than me') type = ActivityType.Competing;
+			client.user.setActivity(statuss, { type: type });
 		}, 125000);
 
 		setInterval(() => {
